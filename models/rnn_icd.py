@@ -74,7 +74,7 @@ def convert_to_one_hot(code_seqs, len=vocabsize):
 
 best_aucrocs = []
 for run in range(10):
-    print 'Run', run
+    print('Run', run)
 
     perm = np.random.permutation(input_seqs.shape[0])
     rinput_seqs = input_seqs#[perm]
@@ -100,7 +100,7 @@ for run in range(10):
 
     for epoch in range(n_epochs):
 
-        print 'Epoch', (epoch+1)
+        print('Epoch', (epoch+1))
 
         for i in (range(0, n_iters, batchsize)):
             batch_icd = train_input_seqs[i:i+batchsize]
@@ -131,14 +131,14 @@ for run in range(10):
         for i in range(len(valid_input_seqs)):
             test_seq = valid_input_seqs[i]
             vpredictions[i] = model.predict(Variable(torch.from_numpy(convert_to_one_hot(test_seq)).float()))
-        print "Validation Test AUC_ROC: ", roc_auc_score(valid_labels, vpredictions)
+        print("Validation Test AUC_ROC: ", roc_auc_score(valid_labels, vpredictions))
 
         ## Testing phase
         predictions = np.zeros(len(test_input_seqs))
         for i in range(len(test_input_seqs)):
-        	test_seq = test_input_seqs[i]
-        	predictions[i] = model.predict(Variable(torch.from_numpy(convert_to_one_hot(test_seq)).float()))
-        print "Test AUC_ROC: ", roc_auc_score(test_labels, predictions)
+            test_seq = test_input_seqs[i]
+            predictions[i] = model.predict(Variable(torch.from_numpy(convert_to_one_hot(test_seq)).float()))
+        print("Test AUC_ROC: ", roc_auc_score(test_labels, predictions))
         # actual_predictions = (predictions>0.5)*1
         # print classification_report(test_labels, actual_predictions)
 
@@ -146,7 +146,7 @@ for run in range(10):
 
     best_aucrocs.append(max(aucrocs))
 
-print "Average AUCROC:", np.mean(best_aucrocs), "+/-", np.std(best_aucrocs)    
+print("Average AUCROC:", np.mean(best_aucrocs), "+/-", np.std(best_aucrocs))
 
     # Use some plotting library
     # if epoch % 10 == 0:
