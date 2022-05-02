@@ -119,7 +119,7 @@ def get_lab(lab):
 	return ret_str
 
 
-print 'Data loaded..'
+print('Data loaded..')
 
 labels = np.array(pickle.load(open('./MIMICIIIPROCESSED.morts')))
 
@@ -130,7 +130,7 @@ testratio = 0.2
 trainlindex = int(len(input_seqs_icd)*trainratio)
 validlindex = int(len(input_seqs_icd)*(trainratio + validratio))
 
-print 'Data prepared..'
+print('Data prepared..')
 
 def convert_to_one_hot(code_seqs, len):
 	new_code_seqs = []
@@ -195,13 +195,13 @@ def get_factors(icd_seq, med_seq, lab_seq, model, actual_score, full_icd):
 
 	return risk_scores[:10]
 
-print 'Starting training..'
+print('Starting training..')
 
 batchsize = 50
 
 best_aucrocs = []
 for run in range(10):
-	print 'Run', run
+	print('Run', run)
 
 	perm = np.random.permutation(input_seqs_icd.shape[0])
 	rinput_seqs_icd = input_seqs_icd#[perm]
@@ -240,7 +240,7 @@ for run in range(10):
 
 		epoch_loss = 0
 		
-		print 'Epoch', (epoch+1)
+		print('Epoch', (epoch+1))
 
 		for i in (range(0, n_iters, batchsize)):
 			batch_icd = train_input_seqs_icd[i:i+batchsize]
@@ -285,7 +285,7 @@ for run in range(10):
 			test_input_lab = Variable(torch.from_numpy(convert_to_one_hot(valid_input_seqs_labs[i], vocabsize_labs)).float())
 			vpredictions[i] = model.predict(test_input_icd, test_input_med, test_input_lab)
 
-		print "Validation AUC_ROC: ", roc_auc_score(valid_labels, vpredictions)
+		print("Validation AUC_ROC: ", roc_auc_score(valid_labels, vpredictions))
 
 		## Testing phase
 		predictions = np.zeros(len(test_input_seqs_icd))
@@ -312,7 +312,7 @@ for run in range(10):
 			# labs_wise_corr[get_avg(test_input_seqs_labs[i], 'l')] += int((predictions[i]>0.5)*1 == test_labels[i])
 			# labs_wise_tot[get_avg(test_input_seqs_labs[i], 'l')] += 1
 
-		print "Test AUC_ROC: ", roc_auc_score(test_labels, predictions)
+		print("Test AUC_ROC: ", roc_auc_score(test_labels, predictions))
 		
 		aucrocs.append(roc_auc_score(test_labels, predictions))
 		# actual_predictions = (predictions>0.5)*1
@@ -320,11 +320,11 @@ for run in range(10):
 
 	best_aucrocs.append(max(aucrocs))
 
-print "Average AUCROC:", np.mean(best_aucrocs), "+/-", np.std(best_aucrocs) 		
+print("Average AUCROC:", np.mean(best_aucrocs), "+/-", np.std(best_aucrocs))		
 
 # print "Final testing and interpretations"
 predictions = np.zeros(len(test_input_seqs_icd))
-print len(test_input_seqs_icd)
+print(len(test_input_seqs_icd))
 count = 0
 for i in (range(len(test_input_seqs_icd))):
 	test_input_icd = Variable(torch.from_numpy(convert_to_one_hot(test_input_seqs_icd[i], vocabsize_icd)).float())
@@ -339,7 +339,7 @@ for i in (range(len(test_input_seqs_icd))):
 		for rf in top_risk_factors:
 			interpretation_file.write(str(rf)+"\n")
 		interpretation_file.write("\n")
-	print count
+	print(count)
 	count = count + 1
 
 interpretation_file.close()

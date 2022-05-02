@@ -81,7 +81,7 @@ def get_factor(i, patid):
 
 best_aucrocs = []
 for run in range(10):
-	print 'Run', run
+	print('Run', run)
 
 	perm = np.random.permutation(input_seqs.shape[0])
 	rinput_seqs = input_seqs#[perm]
@@ -107,14 +107,14 @@ for run in range(10):
 	model.fit(train_input_seqs, train_labels)
 
 	vpredict_probabilities = np.array([a[1] for a in model.predict_proba(valid_input_seqs)])
-	print "Validation AUC_ROC: ", roc_auc_score(valid_labels, vpredict_probabilities)
+	print("Validation AUC_ROC: ", roc_auc_score(valid_labels, vpredict_probabilities))
 
 	predict_probabilities = np.array([a[1] for a in model.predict_proba(test_input_seqs)])
-	print "Test AUC_ROC: ", roc_auc_score(test_labels, predict_probabilities)
+	print("Test AUC_ROC: ", roc_auc_score(test_labels, predict_probabilities))
 
 	best_aucrocs.append(roc_auc_score(test_labels, predict_probabilities))
 
-print "Average AUCROC:", np.mean(best_aucrocs), "+/-", np.std(best_aucrocs) 
+print("Average AUCROC:", np.mean(best_aucrocs), "+/-", np.std(best_aucrocs))
 
 
 interpretation_file = open("Log_Reg_Interpretations.txt", 'w')
@@ -156,7 +156,7 @@ interpretation_file.close()
 # pickle.dump({"FPR":fpr, "TPR":tpr}, open('roc_lr.p', 'wb'))
 # actual_predictions = (predict_probabilities>0.5)*1
 
-# print classification_report(test_labels, actual_predictions)
+# print(classification_report(test_labels, actual_predictions))
 # coeffs = np.array(model.coef_[0])
 
 # icd_scores = {}
@@ -229,7 +229,7 @@ interpretation_file.close()
 
 # for factor in scores:
 # 	if factor[1] in ["\"Encephalopathy NOS\"", "\"Bleed esoph var oth dis\"", "\"Lactulose Enema\"", "\"Cirrhosis of liver NOS\"", "\"Urin tract infection NOS\"", "\"Phytonadione\"", "\"Hy kid NOS w cr kid I-IV\"", "\"Mal neo liver", "\"Red blood cells\"", "\"RDW\"", "\"Hemoglobin\"", "\"0.9% Sodium Chloride\""]:
-# 		print factor
+# 		print(factor)
 
 #for factor in scores:
 
