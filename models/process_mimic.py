@@ -12,7 +12,7 @@
 # <output file>.types: Python dictionary that maps string diagnosis codes to integer diagnosis codes.
 
 import sys
-import cPickle as pickle
+import pickle
 from datetime import datetime
 import math
 
@@ -33,12 +33,19 @@ def convert_to_3digit_icd9(dxStr):
 		else: return dxStr
 
 if __name__ == '__main__':
-	admissionFile = sys.argv[1]
-	diagnosisFile = sys.argv[2]
-	patientsFile = sys.argv[3]
-	medFile = sys.argv[4]
-	labFile = sys.argv[5]
-	outFile = sys.argv[6]
+	admissionFile = "../mimic-iii-clinical-database-1.4/" + sys.argv[1]
+	diagnosisFile = "../mimic-iii-clinical-database-1.4/" + sys.argv[2]
+	patientsFile = "../mimic-iii-clinical-database-1.4/" + sys.argv[3]
+	medFile = "../mimic-iii-clinical-database-1.4/" + sys.argv[4]
+	labFile = "../mimic-iii-clinical-database-1.4/" + sys.argv[5]
+	outFile = "../mimic-iii-clinical-database-1.4/" + sys.argv[6]
+
+	print("Admission file ", admissionFile)
+	print("Diagnosis file ", diagnosisFile)
+	print("Patients file ", patientsFile)
+	print("Med file ", medFile)
+	print("Lab file ", labFile)
+	print("Out file ", outFile, "\n")
 
 #	admAssessmap = pickle.load(open('../R-RNN/admToAssessmentDict.p', 'r'))
 
@@ -156,7 +163,7 @@ if __name__ == '__main__':
 
 	single_admission_count = 0
 
-	for pid, admIdList in pidAdmMap.iteritems():
+	for pid, admIdList in pidAdmMap.items():
 		if len(admIdList) < 2: 
 			single_admission_count += 1 
 			continue
@@ -190,7 +197,7 @@ if __name__ == '__main__':
 	alllabseqs = []
 	abnormallabseqs = []
 
-	for pid, visits in pidSeqMap.iteritems():
+	for pid, visits in pidSeqMap.items():
 		pids.append(pid)
 		morts.append(pidDodMap[pid])
 		seq = []
@@ -203,7 +210,7 @@ if __name__ == '__main__':
 	
 	print('Building pids, dates, strSeqs for 3digit ICD9 code')
 	seqs_3digit = []
-	for pid, visits in pidSeqMap_3digit.iteritems():
+	for pid, visits in pidSeqMap_3digit.items():
 		seq = []
 		for visit in visits:
 			seq.append(visit[1])
@@ -211,7 +218,7 @@ if __name__ == '__main__':
 	
 	print('Building pids, dates, strSeqs for meds')
 	seqs_meds = []
-	for pid, visits in pidSeqMap_meds.iteritems():
+	for pid, visits in pidSeqMap_meds.items():
 		seq = []
 		for visit in visits:
 			seq.append(visit[1])
@@ -233,11 +240,11 @@ if __name__ == '__main__':
 			newPatient.append(newVisit)
 		newSeqs_meds.append(newPatient)
 
-	#print len(types_meds) #3202 meds
+	print("Med types size ", len(types_meds)) #3202 meds
 
 	print('Building pids, dates, strSeqs for all labs')
 	seqs_alllabs = []
-	for pid, visits in pidSeqMap_allLabs.iteritems():
+	for pid, visits in pidSeqMap_allLabs.items():
 		seq = []
 		for visit in visits:
 			seq.append(visit[1])
@@ -259,11 +266,11 @@ if __name__ == '__main__':
 			newPatient.append(newVisit)
 		newSeqs_alllabs.append(newPatient)
 	
-	print(len(types_alllabs))
+	print("All lab types size ", len(types_alllabs))
 
 	print ('Building pids, dates, strSeqs for abnormal labs')
 	seqs_abnormallabs = []
-	for pid, visits in pidSeqMap_abnormalLabs.iteritems():
+	for pid, visits in pidSeqMap_abnormalLabs.items():
 		seq = []
 		for visit in visits:
 			seq.append(visit[1])
@@ -271,7 +278,7 @@ if __name__ == '__main__':
 
 #	print 'Building pids, dates, strSeqs for assessments'
 #	seqs_assessments = []
-#	for pid, visits in pidSeqMap_assessments.iteritems():
+#	for pid, visits in pidSeqMap_assessments.items():
 #		seq = []
 #		for visit in visits:
 #			seq.append(visit[1])
@@ -293,7 +300,7 @@ if __name__ == '__main__':
 			newPatient.append(newVisit)
 		newSeqs_abnormallabs.append(newPatient)
 
-	print(len(types_abnormallabs))
+	print("Abnormal lab types size ", len(types_abnormallabs))
 
 	print('Converting strSeqs to intSeqs, and making types')
 	types = {}
@@ -345,7 +352,7 @@ if __name__ == '__main__':
 			newPatient.append(newVisit)
 		newSeqs_all_int.append(newPatient)
 
-	print(len(types_all))
+	print("All types size ", len(types_all))
 
 	pickle.dump(pids, open(outFile+'.pids', 'wb'), -1)
 	pickle.dump(dates, open(outFile+'.dates', 'wb'), -1)
