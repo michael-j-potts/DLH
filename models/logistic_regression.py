@@ -21,7 +21,7 @@ def combine_encounter(seqs, length):
 	ret_vector = np.zeros(length)
 	for enc in seqs:
 		for code in enc:
-			ret_vector[int(code[1:])] = 1
+			ret_vector[code] = 1
 	return ret_vector
 
 input_seqs = np.array([np.concatenate((combine_encounter(input_seqs_icd[i], vocabsize_icd), combine_encounter(input_seqs_meds[i], vocabsize_meds), combine_encounter(input_seqs_labs[i], vocabsize_labs)), axis=0) for i in range(0, len(input_seqs_icd))])
