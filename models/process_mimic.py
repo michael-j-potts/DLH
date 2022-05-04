@@ -233,10 +233,10 @@ if __name__ == '__main__':
 			newVisit = []
 			for code in visit:
 				if code in types_meds:
-					newVisit.append('m'+str(types_meds[code]))
+					newVisit.append(int(types_meds[code]))
 				else:
 					types_meds[code] = len(types_meds)
-					newVisit.append('m'+str(types_meds[code]))
+					newVisit.append(int(types_meds[code]))
 			newPatient.append(newVisit)
 		newSeqs_meds.append(newPatient)
 
@@ -293,10 +293,10 @@ if __name__ == '__main__':
 			newVisit = []
 			for code in visit:
 				if code in types_abnormallabs:
-					newVisit.append('l'+str(types_abnormallabs[code]))
+					newVisit.append(int(types_abnormallabs[code]))
 				else:
 					types_abnormallabs[code] = len(types_abnormallabs)
-					newVisit.append('l'+str(types_abnormallabs[code]))
+					newVisit.append(int(types_abnormallabs[code]))
 			newPatient.append(newVisit)
 		newSeqs_abnormallabs.append(newPatient)
 
@@ -327,15 +327,19 @@ if __name__ == '__main__':
 			newVisit = []
 			for code in set(visit):
 				if code in types_3digit:
-					newVisit.append('i'+str(types_3digit[code]))
+					newVisit.append(int(types_3digit[code]))
 				else:
 					types_3digit[code] = len(types_3digit)
-					newVisit.append('i'+str(types_3digit[code]))
+					newVisit.append(int(types_3digit[code]))
 			newPatient.append(newVisit)
 		newSeqs_3digit.append(newPatient)
 
+	print("3digit size ", len(newSeqs_3digit))
+	print("newPatient size ", len(newPatient))
 
 	newSeqs_all = [[(newSeqs_abnormallabs[i][j] + newSeqs_meds[i][j] + newSeqs_3digit[i][j]) for j in range(len(newSeqs_abnormallabs[i]))] for i in range(len(newSeqs_abnormallabs))]
+
+	print("newSeqs_all size ", len(newSeqs_all))
 
 	types_all = {}
 	newSeqs_all_int = []
@@ -352,6 +356,7 @@ if __name__ == '__main__':
 			newPatient.append(newVisit)
 		newSeqs_all_int.append(newPatient)
 
+	print("newSeqs_all_int size ", len(newSeqs_all_int))	
 	print("All types size ", len(types_all))
 
 	pickle.dump(pids, open(outFile+'.pids', 'wb'), -1)
