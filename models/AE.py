@@ -54,11 +54,12 @@ class AE(nn.Module):
 			ICDs = ICDs[perm]
 			Meds = Meds[perm]
 			Labs = Labs[perm]
-
+			
 			losses = []
 
 			for i in range(0, ICDs.shape[0], self.batchsize):
 				ICDbatch, Medbatch, Labbatch = ICDs[i:i+self.batchsize], Meds[i:i+self.batchsize], Labs[i:i+self.batchsize]
+
 				ICDbatchvar, Medbatchvar, Labbatchvar = Variable(torch.from_numpy(ICDbatch).float()), Variable(torch.from_numpy(Medbatch).float()), Variable(torch.from_numpy(Labbatch).float())
 
 				outputs = self.forward(ICDbatchvar, Medbatchvar, Labbatchvar)
@@ -81,17 +82,41 @@ class AE(nn.Module):
 
 			prev_loss = np.mean(losses)
 
+def converticd(input):
+	for visit in input:
+		tempcodes = []
+		for codes in visit:
+			tempcodes.append(int(codes))
+		ICD_data.append(np.array(tempcodes, dtype=float))
+
+def convertmed(input):
+	for visit in input:
+		tempcodes = []
+		for codes in visit:
+			tempcodes.append(int(codes))
+		Med_data.append(np.array(tempcodes))
+
+def convertlab(input):
+	for visit in input:
+		tempcodes = []
+		for codes in visit:
+			tempcodes.append(int(codes))
+		Lab_data.append(np.array(tempcodes))
+
+
 model = AE(10,50,175)
-ICD_data = pickle.load(open('./CAEEntries.3digitICD9','r'))
-Med_data = pickle.load(open('./CAEEntries.meds','r'))
-Lab_data = pickle.load(open('./CAEEntries.abnlabs','r'))
+ICD = pickle.load(open('./CAEEntries.3digitICD9','r'))
+Med = pickle.load(open('./CAEEntries.meds','r'))
+Lab = pickle.load(open('./CAEEntries.abnlabs','r'))
 
-print type(ICD_data)
-print type(ICD_data[0][0])
-print "This is the problem. Its string..."
+ICD_data = []
+Med_data = []
+Lab_data = []
+converticd(ICD)
+convertmed(Med)
+convertlab(Lab)
 
-
-model.fit(ICD_data, Med_data, Lab_data)
+model.fit(np.array(ICD_data).astype(float), np.array(Med_data), np.array(Lab_data))
 
 emb_weights = model._modules['emb'].weight.data.numpy().T
 print 'Pickled embedding weights. Shape:', np.array(emb_weights).shape
