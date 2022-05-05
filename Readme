@@ -1,7 +1,13 @@
-The authors of the paper "Learning Latent Space Representations to Predict Patient Outcomes" 
-have made their code available here: https://github.com/subendhu19/CLOUT
+Paper Citation:Rongali, Subendhu, Rose, Adam J., McManus, David D., Bajracharya,
+Adarsha S., Kapoor, Alok, Granillo, Edgard, Yu, Hong (2020). Learning Latent 
+Space Representations to Predict Patient Outcomes: Model Development and Validation. 
+Journal of Medical Internet Research, 22(3):e16374. doi: 10.2196/16374
 
-Further, the authors of the paper provided us with "process_mimic.py" to preprocess the data.
+The authors have made their code available here: https://github.com/subendhu19/CLOUT
+
+Our MIMIC-III data set was sourced from PhysioNet after completing the required CITI training
+course "Working with healthcare data for research". Further, the authors of the paper provided 
+us with "process_mimic.py" to preprocess the data.
 
 To begin, the code was in python 2.7, and depended upon several depreciated dependancies. Further, 
 several minor code alterations were required for unkknown reasons. This included altering the shape 
