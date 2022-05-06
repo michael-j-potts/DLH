@@ -249,7 +249,7 @@ for run in range(10):
 	n_iters = train_input_seqs_icd.shape[0]
 
 	model = RNN(n_epochs, 1, vocabsize, embsize)
-	criterion = nn.BCEWithLogitsLoss(reduction = 'sum')
+	criterion = nn.BCEWithLogitsLoss(reduction = 'mean')
 	optimizer = optim.Adam(model.parameters(), lr=0.01)
 
 	aucrocs = []
