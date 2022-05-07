@@ -1,3 +1,6 @@
+#This model combines both the concatenation and latent space implementations to create
+#the main CLOUT model evaluated in the given paper
+
 from __future__ import division
 import argparse
 import math
