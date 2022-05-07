@@ -14,7 +14,9 @@ meds = []
 abnlabs = []
 
 
-
+#We want to unravel each of icd med and lab to reduce to to an array of arrays
+#And we want to get rid of the "i", "m", and "l" descriptors for each code to 
+#prevent problems when feeding them into the models
 def unravelicd(input):
     for patient in input:
         for visit in patient:
