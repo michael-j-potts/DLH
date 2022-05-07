@@ -1,3 +1,5 @@
+#This model makes use of only the latent space concepts. 
+
 from __future__ import division
 import argparse
 import math
