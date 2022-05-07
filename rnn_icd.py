@@ -1,3 +1,6 @@
+#This is the ICD only LSTM that does not make use of either concatenation or the latent space
+#models.
+
 from __future__ import division
 import argparse
 import math
