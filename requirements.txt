@@ -1,3 +1,25 @@
+#This file is a print out of the environment and requirements used to run the 
+#models listed. For the short list of imported dependencies, please refer to 
+#the first block of import statements. For a comprehensive view of the 
+#anaconda environment used, please refer below.
+
+__future__ - division
+argparse
+math
+numpy as np
+time
+torch
+torch.autograd - Variable
+torch.nn as nn
+torch.nn.functional as F
+torch.optim as optim
+random
+pickle
+tqdm - tqdm
+sklearn.metrics - roc_auc_score, classification_report, roc_curve, linear_model
+matplotlib.pyplot as plt
+
+
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
