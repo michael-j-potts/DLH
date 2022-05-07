@@ -1,3 +1,8 @@
+#This is our correlational autoencoder file which is used to create the embedding weights
+#required by the latent models. This file receives the code produced by the converter file
+#and then stores the embedding weights after creation. We will run CAE until the models
+#average loss is below 0.00005
+
 from __future__ import division
 import math
 import numpy as np
