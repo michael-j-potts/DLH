@@ -19,8 +19,9 @@ required updating, and futher, it changed the results of our paper. The code in 
 similar to the  papers results with minor variations noted. As well, we 
 implemented a mortality ablation. The paper specifically measured total deaths of patients who stayed 
 in the ICU while our ablation focused on patients who died in hospital during/after staying in the ICU. 
-We found a ____________________________
+We found a large improvement in the models predictive capabilities when it was run only with patients
+who died in hospital.
 
 To run our models, simply run the ./run_experiments.sh file, which will run the data preparation scrips, 
-the embedding preparation scripts, thebaseline models, the CLOUT models, and additional ablations that 
-we have implemented in python3. 
+the embedding preparation scripts, the baseline models, the CLOUT models, and additional ablations that 
+we have implemented in python3.
