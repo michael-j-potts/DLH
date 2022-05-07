@@ -1,3 +1,5 @@
+#This is a concatenate only LSTM based model that does not use latent space.
+
 from __future__ import division
 import argparse
 import math
