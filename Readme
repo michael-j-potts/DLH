@@ -16,8 +16,7 @@ Further, to create the latent spaces CAE and AE, we created another file to take
 files and alter their shapes, and convert them into embeddings. Once this was complete and the models 
 were able to run, we updated the code into python 3. This process broke many more dependencies which 
 required updating, and futher, it changed the results of our paper. The code in python 2 was quite 
-similar to the  papers results with minor variations noted. The code in python3 resulted in a -0.4%
-to a +5.52% increase in performance with the average increase found to be +1.996%. As well, we 
+similar to the  papers results with minor variations noted. As well, we 
 implemented a mortality ablation. The paper specifically measured total deaths of patients who stayed 
 in the ICU while our ablation focused on patients who died in hospital during/after staying in the ICU. 
 We found a ____________________________
