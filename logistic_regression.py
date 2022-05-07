@@ -1,3 +1,6 @@
+#This is the baseline logistic regression model used by the authors to evaluate the success of 
+#the clout model
+
 import numpy as np
 import pickle
 from sklearn import linear_model
